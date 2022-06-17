@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.basicchatapp.R
 import com.example.basicchatapp.databinding.FragmentChatBinding
+import com.example.basicchatapp.model.Chat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
@@ -22,6 +25,8 @@ class ChatFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var firestore : FirebaseFirestore
     private lateinit var auth : FirebaseAuth
+    private lateinit var adapter : ChatRecyclerAdapter
+    private var chats = arrayListOf<Chat>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +44,10 @@ class ChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        adapter = ChatRecyclerAdapter()
+        binding.chatRecycler.adapter = adapter
+        binding.chatRecycler.layoutManager = LinearLayoutManager(requireContext())
 
         binding.ivSend.setOnClickListener {
             auth.currentUser?.let {
@@ -61,6 +70,32 @@ class ChatFragment : Fragment() {
                     }
 
             }
+        }
+
+
+        firestore.collection("Chats").orderBy("date").addSnapshotListener{value, error ->
+
+            if (error != null){
+                Toast.makeText(requireContext(),error.localizedMessage,Toast.LENGTH_LONG).show()
+            }else{
+                if (value != null){
+                    if (value.isEmpty){
+                        Toast.makeText(requireContext(),"Mesaj yok",Toast.LENGTH_LONG).show()
+                    }else{
+                        val documents = value.documents
+                        chats.clear()
+                        for (document in documents){
+                            val user = document.get("user") as String
+                            val text = document.get("text") as String
+                            val chat = Chat(user,text)
+                            chats.add(chat)
+                            adapter.chats = chats
+                        }
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+            }
+
         }
 
     }

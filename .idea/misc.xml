@@ -6,6 +6,8 @@
         <entry key="..\:/Users/enes/AndroidStudioProjects/BasicChatApp/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/enes/AndroidStudioProjects/BasicChatApp/app/src/main/res/layout/fragment_chat.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/enes/AndroidStudioProjects/BasicChatApp/app/src/main/res/layout/fragment_login.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/enes/AndroidStudioProjects/BasicChatApp/app/src/main/res/layout/recycler_row.xml" value="0.1" />
+        <entry key="..\:/Users/enes/AndroidStudioProjects/BasicChatApp/app/src/main/res/layout/recycler_row_right.xml" value="0.1" />
       </map>
     </option>
   </component>

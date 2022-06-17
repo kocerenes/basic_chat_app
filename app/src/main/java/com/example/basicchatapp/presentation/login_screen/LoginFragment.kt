@@ -25,6 +25,13 @@ class LoginFragment : Fragment() {
 
         auth = Firebase.auth
 
+        val currentUser = auth.currentUser
+
+        if(currentUser!=null){
+            val action = LoginFragmentDirections.actionLoginFragmentToChatFragment()
+            findNavController().navigate(action)
+        }
+
     }
 
     override fun onCreateView(

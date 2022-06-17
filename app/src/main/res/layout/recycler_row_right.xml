@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="7dp">
+
+    <TextView
+        android:id="@+id/chatRecyclerTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test"
+        android:textSize="20sp"
+        android:textAlignment="textEnd"
+        android:layout_margin="5dp"
+        android:textColor="@color/purple_500">
+
+    </TextView>
+
+</LinearLayout>
