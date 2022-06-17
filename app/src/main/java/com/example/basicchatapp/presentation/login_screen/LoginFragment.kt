@@ -39,7 +39,13 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnLogin.setOnClickListener{
-
+            auth.signInWithEmailAndPassword(binding.ptEmail.text.toString(),binding.ptPassword.text.toString())
+                .addOnSuccessListener {
+                    val action = LoginFragmentDirections.actionLoginFragmentToChatFragment()
+                    findNavController().navigate(action)
+                }.addOnFailureListener{ exception ->
+                    Toast.makeText(requireContext(),exception.localizedMessage,Toast.LENGTH_LONG).show()
+                }
         }
 
         binding.btnSignup.setOnClickListener{
